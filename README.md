@@ -1,107 +1,88 @@
+# Qiskit Quantum Computing Challenges
 
+Hands-on quantum circuit experiments built with Qiskit and Qiskit Aer.
 
-Qiskit Fall Fest 2026 — Quantum Computing Challenges
-A collection of Jupyter Notebook solutions developed as part of Qiskit Fall Fest 2026, organized by IBM Quantum in collaboration with Vishnu Institute of Technology.
+[![GitHub](https://img.shields.io/badge/GitHub-View%20Notebooks-181717?logo=github)](https://github.com/Praneeth2711/Qiskit) [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/) [![Qiskit](https://img.shields.io/badge/Qiskit-Quantum%20circuits-6929C4)](https://www.ibm.com/quantum/qiskit)
 
-This repository contains quantum computing experiments implemented using Qiskit, with circuit visualizations, simulations, measurement results, and histograms.
+Explore how quantum gates affect measurement, from a single qubit to correlated two-qubit Bell states. Each challenge is a Jupyter notebook with circuit diagrams, Aer simulation, measurement counts, and plots.
 
-📂 Repository Contents
-File	Description
-Challenge 1.ipynb	Jupyter Notebook solution for Challenge 1
-Challenge 2.ipynb	Jupyter Notebook solution for Challenge 2
-Challenge 3.ipynb	Investigating how a quantum gate changes the correlation between two qubits
-Challenge 4.ipynb	Switching between correlated and opposite measurement outcomes
-🎯 Objectives
-Learn the fundamentals of quantum circuits using Qiskit.
+> These notebooks use a local ideal simulator. No IBM Quantum account or quantum hardware access is required.
 
-Create and execute quantum circuits with two qubits.
+## Challenges
 
-Understand quantum gates and their effects on measurement outcomes.
+| Notebook                           | Topic                  | What you will explore                                                                 |
+| ---------------------------------- | ---------------------- | ------------------------------------------------------------------------------------- |
+| [Challenge 1](Challenge%201.ipynb) | Predict the output     | Compare one `X` gate, two `X` gates, and an `H` gate on a single qubit.               |
+| [Challenge 2](Challenge%202.ipynb) | Biased quantum coin    | Use `RY` rotations to favor measuring `0` or `1`, then compare the sampled counts.    |
+| [Challenge 3](Challenge%203.ipynb) | Change the correlation | Create a Bell state, apply `X` to one qubit, and compare the possible joint outcomes. |
+| [Challenge 4](Challenge%204.ipynb) | Correlation switch     | Build circuits that produce correlated versus opposite measurement outcomes.          |
 
-Simulate quantum experiments and analyze measurement counts.
+## Expected Outcomes
 
-Visualize and compare experimental results using histograms.
+These are ideal probabilities; finite-shot results can vary between runs.
 
-Explore correlations and entanglement in two-qubit systems.
+| Challenge | Circuit                                          | Ideal measurement behavior            |
+| --------- | ------------------------------------------------ | ------------------------------------- |
+| 1         | One `X` gate                                     | `1` with probability 100%             |
+| 1         | Two `X` gates                                    | `0` with probability 100%             |
+| 1         | One `H` gate                                     | `0` and `1` with probability 50% each |
+| 2         | `RY(pi/3)`                                       | `0` about 75%, `1` about 25%          |
+| 2         | `RY(2*pi/3)`                                     | `0` about 25%, `1` about 75%          |
+| 3-4       | Bell circuit: `H` then `CNOT`                    | Correlated outcomes: `00` or `11`     |
+| 3-4       | Bell circuit followed by `X` on the second qubit | Opposite outcomes: `01` or `10`       |
 
-🛠️ Technologies Used
-Python
+Each notebook samples 100 shots per circuit and visualizes the returned counts. The `H` and `RY` circuits produce probabilistic results, so observed percentages will not always exactly match their ideal probabilities.
 
-Qiskit — Quantum circuit creation and simulation
+## Run Locally
 
-Qiskit Aer — Quantum circuit simulator
+You need Python 3.10 or later. From a terminal:
 
-Matplotlib — Data visualization and histograms
+```bash
+git clone https://github.com/Praneeth2711/Qiskit.git
+cd Qiskit
+python -m venv .venv
+```
 
-NumPy — Numerical operations
+Activate the environment, then install the libraries.
 
-Jupyter Notebook / Google Colab — Interactive development environment
+```powershell
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
+python -m pip install qiskit qiskit-aer matplotlib numpy pandas notebook
+```
 
-🚀 Getting Started
-Option 1: Google Colab
-Open the notebook you want to execute.
+```bash
+# macOS / Linux
+source .venv/bin/activate
+python -m pip install qiskit qiskit-aer matplotlib numpy pandas notebook
+```
 
-Upload it to Google Colab.
+Start Jupyter and open a challenge notebook:
 
-Install the required libraries in a code cell:
-
-%pip install qiskit qiskit-aer matplotlib numpy
-Run the notebook cells in order.
-
-Observe the quantum circuits, measurement counts, and histograms.
-
-Option 2: Run Locally
-Install Python and Jupyter Notebook, then install the dependencies:
-
-pip install qiskit qiskit-aer matplotlib numpy notebook
-Clone this repository:
-
-git clone https://github.com/Vinay32592/Qiskit-Challenges.git
-Navigate to the repository directory:
-
-cd Qiskit-Challenges
-Launch Jupyter Notebook:
-
+```bash
 jupyter notebook
-Open any challenge notebook and execute the cells in order.
+```
 
-🔬 Challenge Highlights
-Challenge 3 — Can You Change the Correlation?
-Investigates how modifying a Bell-state circuit with an additional quantum gate changes the relationship between two-qubit measurement outcomes.
+Run the cells from top to bottom. The notebooks run circuits using `AerSimulator`.
 
-Challenge 4 — Quantum Correlation Switch
-Demonstrates two different measurement behaviors:
+## Run in Google Colab
 
-Correlated outcomes: 00 and 11
+1. Open a challenge notebook on GitHub.
+2. Download it and upload the `.ipynb` file to [Google Colab](https://colab.research.google.com/).
+3. Run the notebook cells from top to bottom. If prompted for dependencies, run `%pip install qiskit qiskit-aer matplotlib numpy pandas` in a code cell.
 
-Opposite outcomes: 01 and 10
+## Tools and Concepts
 
-The circuits are simulated for 100 shots each, and the measurement results are compared using histograms.
+- **Qiskit:** quantum circuit construction, gates, and measurement
+- **Qiskit Aer:** local circuit simulation
+- **Matplotlib:** measurement histograms and comparisons
+- **NumPy and pandas:** rotation parameters and tabular results
+- **Jupyter Notebook:** interactive code and visualizations
 
-📊 Results and Visualization
-The notebooks demonstrate quantum circuit structures, measurement counts, and graphical comparisons of possible measurement outcomes.
+The challenges introduce the Pauli-`X`, Hadamard, and `RY` gates; computational-basis measurement; Bell-state preparation with `CNOT`; shot sampling; and two-qubit correlations.
 
-For the ideal simulated circuits in Challenges 3 and 4, the expected outcomes illustrate how quantum gates can change the measurement relationship between qubits.
+## About
 
-📚 Learning Outcomes
-Understanding quantum circuit construction.
+Prepared for Qiskit Fall Fest 2026 challenge activities associated with IBM Quantum and Vishnu Institute of Technology.
 
-Applying Hadamard, CNOT, and Pauli-X gates.
-
-Exploring Bell states and two-qubit correlations.
-
-Executing circuits with a quantum simulator.
-
-Analyzing measurement results and visualizing data.
-
-👨‍💻 Author
-Vinay32592
-
-GitHub: @Vinay32592
-
-Acknowledgment
-Developed as part of the Qiskit Fall Fest 2026 learning activities associated with IBM Quantum and Vishnu Institute of Technology.
-
-Exploring quantum computing one circuit at a time.
-
-
+**Author:** [Praneeth2711](https://github.com/Praneeth2711)
